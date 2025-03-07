@@ -1,4 +1,4 @@
-from functools import lru_cache
+from functools import cache
 
 from django.core.exceptions import FieldError
 from django.db.models import F, Q
@@ -7,7 +7,7 @@ from django.utils import timezone
 from wagtail.models import Page, get_page_models
 
 
-@lru_cache(maxsize=None)
+@cache
 def get_periodic_review_models():
     from .models import PeriodicReviewMixin
 

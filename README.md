@@ -2,11 +2,11 @@
 
 A Wagtail package for periodic page content reviews for quality or audit purposes.
 
-[![Build status](https://img.shields.io/github/actions/workflow/status/zerolab/wagtail-periodic-review/test.yml?branch=main)](https://github.com/zerolab/wagtail-periodic-review/actions)
+[![Build status](https://img.shields.io/github/actions/workflow/status/torchbox/wagtail-periodic-review/test.yml?branch=main)](https://github.com/torchbox/wagtail-periodic-review/actions)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
-![A screenshot of the Wagtail administrative dashboard with periodic review panels](https://github.com/zerolab/wagtail-periodic-review/raw/main/.github/wagtail-periodic-review.webp)
+![A screenshot of the Wagtail administrative dashboard with periodic review panels](https://github.com/torchbox/wagtail-periodic-review/raw/main/.github/wagtail-periodic-review.webp)
 
 ## Features
 
@@ -65,7 +65,7 @@ class MyPage(PeriodicReviewMixin, Page):
 To make changes to this project, first clone this repository:
 
 ```sh
-git clone git@github.com:zerolab/wagtail-periodic-review.git
+git clone git@github.com:torchbox/wagtail-periodic-review.git
 cd wagtail-periodic-review
 ```
 
