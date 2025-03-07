@@ -34,8 +34,8 @@ dependencies = [
 ]
 
 [project.urls]
-Source = "https://github.com/zerolab/wagtail-periodic-review/blob/main/CHANGELOG.md"
-Changelog = "https://github.com/zerolab/wagtail-periodic-review/blob/main/CHANGELOG.md"
+Source = "https://github.com/torchbox/wagtail-periodic-review/blob/main/CHANGELOG.md"
+Changelog = "https://github.com/torchbox/wagtail-periodic-review/blob/main/CHANGELOG.md"
 
 
 [build-system]
