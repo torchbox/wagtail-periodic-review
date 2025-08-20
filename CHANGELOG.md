@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- Added Support for Wagtail 7.1 (@damwaingames)
+
 ## [0.4.0] - 2024-08-22
 
 ### Added
