@@ -4,7 +4,8 @@ description = "A Wagtail package for periodic page content reviews"
 authors = [{name = "Andy Babic", email = "andy.babic@torchbox.com"}]
 maintainers = [{name = "Dan Braghis", email="dan.braghis@torchbox.com"}]
 readme = "README.md"
-license = {file = "LICENSE"}
+license = "BSD-3-Clause"
+license-files = [ "LICENSE" ]
 keywords = ["Wagtail", "Django", "content", "review"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -18,7 +19,6 @@ classifiers = [
     "Framework :: Wagtail",
     "Framework :: Wagtail :: 6",
     "Framework :: Wagtail :: 7",
-    "License :: OSI Approved :: BSD License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
