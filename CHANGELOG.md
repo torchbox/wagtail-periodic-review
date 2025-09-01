@@ -6,6 +6,10 @@
 
 - Added Support for Wagtail 7.1 (@damwaingames)
 
+### Changed
+
+- Updated the homepage panels and report listings to include locale labels when internationalization is enabled.
+
 ## [0.4.0] - 2024-08-22
 
 ### Added

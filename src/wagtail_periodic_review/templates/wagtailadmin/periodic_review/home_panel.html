@@ -1,6 +1,6 @@
 {% load i18n wagtailadmin_tags wagtailcore_tags %}
 {% if page_list %}
-    {% panel id=heading|slugify heading=heading %}
+    {% panel id=heading|slugify heading=heading classname="w-panel--dashboard" %}
         {% if description %}
             <div class="help-block {{ description_css_class }}">
                 {% icon name=description_icon %}
@@ -8,58 +8,69 @@
             </div>
         {% endif %}
 
-        <table class="listing listing-page">
+        <table class="listing listing--dashboard listing-page">
             <col />
-            <col width="26%"/>
+            <col width="10%"/>
+            <col width="7%"/>
+            <col width="25%"/>
             <col width="15%"/>
             <col width="15%"/>
             <thead>
                 <tr>
-                    <th class="title">{% trans "Title" %}</th>
-                    <th>{% trans "Type" %}</th>
-                    <th>{% trans "Last review" %}</th>
-                    <th>{% trans "Review due" %}</th>
+                    <th class="title">{% translate "Title" %}</th>
+                    <th><span class="w-sr-only">{% translate "Language" %}</span></th>
+                    <th><span class="w-sr-only">{% translate "Privacy and access" %}</span></th>
+                    <th>{% translate "Type" %}</th>
+                    <th>{% translate "Last review" %}</th>
+                    <th>{% translate "Review due" %}</th>
                 </tr>
             </thead>
             <tbody>
                 {% for page in page_list %}
                     <tr>
-                        <td class="title" valign="top">
+                        <td class="title">
                             <div class="title-wrapper">
-                                <a href="{% url 'wagtailadmin_pages:edit' page.id %}" title="{% trans 'Edit this page' %}">{{ page.get_admin_display_title }}</a>
-
-                                {% i18n_enabled as show_locale_labels %}
-                                {% if show_locale_labels and page.locale_id %}
-                                    {% locale_label_from_id page.locale_id as locale_label %}
-                                    <span class="w-status w-status--label">{{ locale_label }}</span>
-                                {% endif %}
-                                {% include "wagtailadmin/pages/listing/_privacy_indicator.html" with page=page %}
-                                {% include "wagtailadmin/pages/listing/_locked_indicator.html" with page=page %}
+                                <a href="{% url 'wagtailadmin_pages:edit' page.id %}" title="{% translate 'Edit this page' %}">{{ page.get_admin_display_title }}</a>
                             </div>
-                            <ul class="actions">
-                                <li><a href="{% url 'wagtailadmin_pages:edit' page.id %}" class="button button-small button-secondary">{% trans "Edit" %}</a></li>
-                                {% if page.has_unpublished_changes and page.is_previewable %}
-                                    <li><a href="{% url 'wagtailadmin_pages:view_draft' page.id %}" class="button button-small button-secondary" target="_blank" rel="noopener noreferrer">{% trans 'Draft' %}</a></li>
-                                {% endif %}
-                                {% if page.live %}
-                                    {% pageurl page as page_url %}
-                                    {% if page_url is not None %}
-                                        <li><a href="{{ page_url }}" class="button button-small button-secondary" target="_blank" rel="noopener noreferrer">{% trans 'View' %}</a></li>
-                                    {% endif %}
-                                    <li><a href="{% url 'wagtailadmin_pages:unpublish' page.id %}" class="button button-small button-secondary">{% trans 'Unpublish' %}</a></li>
-                                {% endif %}
-                            </ul>
                         </td>
-                        <td valign="top">
+                        <td>
+                            {% i18n_enabled as show_locale_labels %}
+                            {% if show_locale_labels and page.locale_id %}
+                                {% locale_label_from_id page.locale_id as locale_label %}
+                                {% status locale_label classname="w-status--label" %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% include "wagtailadmin/pages/listing/_privacy_indicator.html" with page=page %}
+                            {% include "wagtailadmin/pages/listing/_locked_indicator.html" with page=page %}
+                        </td>
+                        <td>
                             {{ page.specific_class.get_verbose_name }}
                         </td>
-                        <td valign="top">
+                        <td>
                             {{ page.last_review_date|date:"N Y" }}
                         </td>
-                        <td valign="top">
+                        <td>
                             {{ page.next_review_date|date:"N Y" }}
                         </td>
-
+                        <td class="actions-container">
+                            <ul class="actions">
+                                <li>
+                                    {% dropdown toggle_icon="dots-horizontal" toggle_aria_label=_("Actions") %}
+                                        <a href="{% url 'wagtailadmin_pages:edit' page.id %}">{% translate "Edit" %}</a>
+                                        {% if page.has_unpublished_changes and page.is_previewable %}
+                                            <a href="{% url 'wagtailadmin_pages:view_draft' page.id %}" target="_blank" rel="noreferrer">{% translate "Draft" %}</a>
+                                        {% endif %}
+                                        {% if page.live %}
+                                            {% pageurl page as page_url %}
+                                            {% if page_url is not None %}
+                                                <a href="{{ page_url }}" target="_blank" rel="noreferrer">{% translate 'Live' %}</a>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% enddropdown %}
+                                </li>
+                            </ul>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
