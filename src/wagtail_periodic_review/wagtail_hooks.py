@@ -3,7 +3,6 @@ from typing import Any
 
 from django.urls import path, reverse
 from django.utils.translation import gettext as _
-from wagtail import VERSION as WAGTAIL_VERSION
 from wagtail import hooks
 from wagtail.admin.menu import MenuItem
 from wagtail.admin.ui.components import Component
@@ -85,25 +84,18 @@ def register_report_menu_item():
 
 @hooks.register("register_admin_urls")
 def register_report_url():
-    urls = [
+    return [
         path(
             "reports/periodic-review/",
             PeriodicReviewContentReport.as_view(),
             name="wagtail_periodic_review_report",
-        )
+        ),
+        path(
+            "reports/periodic-review/results/",
+            PeriodicReviewContentReport.as_view(results_only=True),
+            name="wagtail_periodic_review_report_results",
+        ),
     ]
-
-    if WAGTAIL_VERSION >= (6, 2):
-        # Add a results-only view to add support for AJAX-based filtering
-        urls.append(
-            path(
-                "reports/periodic-review/results/",
-                PeriodicReviewContentReport.as_view(results_only=True),
-                name="wagtail_periodic_review_report_results",
-            ),
-        )
-
-    return urls
 
 
 @hooks.register("register_icons")
