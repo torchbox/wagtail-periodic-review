@@ -1,6 +1,7 @@
 from collections.abc import Mapping
 from typing import Any
 
+from django.conf import settings
 from django.urls import path, reverse
 from django.utils.translation import gettext as _
 from wagtail import hooks
@@ -23,9 +24,14 @@ class BaseHomePanel(Component):
         self.request = request
 
     def get_page_list(self):
-        return PagePermissionPolicy().instances_user_has_permission_for(
+        pages = PagePermissionPolicy().instances_user_has_permission_for(
             self.request.user, "change"
         )
+
+        if getattr(settings, "WAGTAIL_I18N_ENABLED", False):
+            pages = pages.prefetch_related("locale")
+
+        return pages
 
     def get_context_data(self, parent_context: Mapping[str, Any]) -> Mapping[str, Any]:
         context = super().get_context_data(parent_context)
@@ -43,6 +49,7 @@ class BaseHomePanel(Component):
 
 
 class OverdueReviewsPanel(BaseHomePanel):
+    name = "wpr-review-overdue"
     heading = _("Content review overdue")
     description = _("The following pages are overdue a review, but are still live.")
     description_css_class = "help-critical"
@@ -55,6 +62,7 @@ class OverdueReviewsPanel(BaseHomePanel):
 
 
 class ForReviewThisMonthPanel(BaseHomePanel):
+    name = "wpr-review-next"
     heading = _("For review this month")
     description = _("The following live pages are due a review this month.")
     description_css_class = "help-warning"
