@@ -15,10 +15,10 @@
             <col width="15%"/>
             <thead>
                 <tr>
-                    <th class="title">{% trans "Title" %}</th>
-                    <th>{% trans "Type" %}</th>
-                    <th>{% trans "Last review" %}</th>
-                    <th>{% trans "Review due" %}</th>
+                    <th class="title">{% translate "Title" %}</th>
+                    <th>{% translate "Type" %}</th>
+                    <th>{% translate "Last review" %}</th>
+                    <th>{% translate "Review due" %}</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,7 +26,7 @@
                     <tr>
                         <td class="title" valign="top">
                             <div class="title-wrapper">
-                                <a href="{% url 'wagtailadmin_pages:edit' page.id %}" title="{% trans 'Edit this page' %}">{{ page.get_admin_display_title }}</a>
+                                <a href="{% url 'wagtailadmin_pages:edit' page.id %}" title="{% translate 'Edit this page' %}">{{ page.get_admin_display_title }}</a>
 
                                 {% i18n_enabled as show_locale_labels %}
                                 {% if show_locale_labels and page.locale_id %}
@@ -37,16 +37,16 @@
                                 {% include "wagtailadmin/pages/listing/_locked_indicator.html" with page=page %}
                             </div>
                             <ul class="actions">
-                                <li><a href="{% url 'wagtailadmin_pages:edit' page.id %}" class="button button-small button-secondary">{% trans "Edit" %}</a></li>
+                                <li><a href="{% url 'wagtailadmin_pages:edit' page.id %}" class="button button-small button-secondary">{% translate "Edit" %}</a></li>
                                 {% if page.has_unpublished_changes and page.is_previewable %}
-                                    <li><a href="{% url 'wagtailadmin_pages:view_draft' page.id %}" class="button button-small button-secondary" target="_blank" rel="noopener noreferrer">{% trans 'Draft' %}</a></li>
+                                    <li><a href="{% url 'wagtailadmin_pages:view_draft' page.id %}" class="button button-small button-secondary" target="_blank" rel="noopener noreferrer">{% translate "Draft" %}</a></li>
                                 {% endif %}
                                 {% if page.live %}
                                     {% pageurl page as page_url %}
                                     {% if page_url is not None %}
-                                        <li><a href="{{ page_url }}" class="button button-small button-secondary" target="_blank" rel="noopener noreferrer">{% trans 'View' %}</a></li>
+                                        <li><a href="{{ page_url }}" class="button button-small button-secondary" target="_blank" rel="noopener noreferrer">{% translate 'View' %}</a></li>
                                     {% endif %}
-                                    <li><a href="{% url 'wagtailadmin_pages:unpublish' page.id %}" class="button button-small button-secondary">{% trans 'Unpublish' %}</a></li>
+                                    <li><a href="{% url 'wagtailadmin_pages:unpublish' page.id %}" class="button button-small button-secondary">{% translate "Unpublish" %}</a></li>
                                 {% endif %}
                             </ul>
                         </td>

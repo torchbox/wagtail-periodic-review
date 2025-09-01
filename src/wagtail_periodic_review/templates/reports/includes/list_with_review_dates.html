@@ -1,15 +1,15 @@
-{% extends 'wagtailadmin/reports/listing/_list_page_report.html' %}
+{% extends "wagtailadmin/reports/listing/_list_page_report.html" %}
 {% load i18n %}
 
 {% block extra_columns %}
-    <th>Last reviewed</th>
-    <th>Next review due</th>
+    <th>{% translate 'Last reviews' %}</th>
+    <th>{% translate 'Next review due' %}</th>
 {% endblock %}
 
 
 {% block page_title %}
     {% if page_perms.can_edit %}
-        <a href="{% url 'wagtailadmin_pages:edit' page.id %}" title="{% trans 'Edit this page' %}">{{ page.get_admin_display_title }}</a>
+        <a href="{% url 'wagtailadmin_pages:edit' page.id %}" title="{% translate 'Edit this page' %}">{{ page.get_admin_display_title }}</a>
     {% else %}
         {{ page.get_admin_display_title }}
     {% endif %}
